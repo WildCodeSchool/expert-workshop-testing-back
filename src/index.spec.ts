@@ -19,8 +19,8 @@ describe(
         beforeAll(
             async ()=>{
                 ///// uncomment lines below if you want an inmemory version
-                // mongo = new MongoMemoryServer();
-                // config.uri = await mongo.getUri();
+                mongo = new MongoMemoryServer();
+                config.uri = await mongo.getUri();
                 
                 apollo = await startServer(config);
             }
