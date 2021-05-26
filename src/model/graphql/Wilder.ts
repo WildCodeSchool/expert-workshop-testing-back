@@ -7,10 +7,6 @@ export class Wilder{
     _id:string = "";
 
 
-    @Field(type=>ID, {nullable: true})
-    id:string = "";
-
-
     @Field(type=>String, {nullable: true})
     name:string = "";
     

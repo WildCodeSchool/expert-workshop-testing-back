@@ -26,7 +26,6 @@ export class WilderResolver {
     // elle retourne le wilder nouvellement crée
     @Mutation(returns => Wilder)
     public async createWilder(
-        @Arg("id", type => Int) id: number,
         @Arg("name") name: string,
         @Arg("city") city: string
     ) {
@@ -44,12 +43,13 @@ export class WilderResolver {
     // elle retourne le wilder mis à jour
     @Mutation(returns => Wilder)
     public async updateWilder(
-        @Arg("id", type => Int) id: number,
+        @Arg("id", type => String) id: number,
         @Arg("name") name: string,
         @Arg("city") city: string
     ) {
         const body: any = { name: name, city: city };
-        return await WilderModel.updateOne({ _id: id }, body);
+        await WilderModel.updateOne({ _id: id }, body);
+        return await WilderModel.findById(id);
     }
     
     // cette méthode est une mutation, çàd qu'elle va servir à écrire /modifier/supprimer de la donnée
