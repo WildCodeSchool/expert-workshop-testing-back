@@ -12,7 +12,20 @@ export class WilderResolver {
         // si l'id n'existe pas, mongoose renvoie undefined, ce qui me permet 
         // de renvoyer null parce que, rappel: 
         // undefined || something ---  renvoie toujours something
+        
         return await WilderModel.findById(id)||null;
+    }
+
+    // retourne un wilder par son id, si et uniquement si son nom commence par une voyelle
+    @Query(returns => Wilder, { nullable: true })
+    public async getWilderByIdIfItsNameBeginsWithAVowel(@Arg("id", type => String) id: string) {
+        
+        const vowels:string[] = ["a","e","i","o","u","y"];
+        const wilder:Wilder = await WilderModel.findById(id)||null;
+        if( wilder === null || !vowels.includes( wilder.name.charAt(0)) )
+            return null; 
+
+        return wilder;
     }
 
     // cette méthode est une query, çàd qu'elle va servir à la lecture de données
